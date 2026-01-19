@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>🎧 My Spotify Clone</header>
+<div class="grid" id="songs"></div>
 
+<script>
+fetch("/api/songs")
+.then(r=>r.json())
+.then(data=>{
+  const box = document.getElementById("songs");
+  data.forEach(s=>{
+    box.innerHTML += `
+      <div class="card">
+        <img src="${s.cover}">
+        <h3>${s.title}</h3>
+        <p>${s.artist}</p>
+        <audio controls src="${s.audio}"></audio>
+      </div>`;
+  });
+});
+</script>
+</body>
+</html>
